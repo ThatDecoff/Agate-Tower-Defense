@@ -14,11 +14,13 @@ public class TowerPlacement : MonoBehaviour
             return;
         }
         Tower tower = collision.GetComponent<Tower>();
+        //Debug.Log($"Entered : {tower?.name}; Placed : {_placedTower?.name}");
 
         if (tower != null)
         {
             tower.SetPlacePosition(transform.position);
             _placedTower = tower;
+            //Debug.Log($"Success Enter : {tower?.name}; Placed : {_placedTower?.name}");
         }
     }
 
@@ -29,8 +31,14 @@ public class TowerPlacement : MonoBehaviour
         {
             return;
         }
+        Tower tower = collision.GetComponent<Tower>();
+        //Debug.Log($"Exit : {tower?.name}; Placed : {_placedTower?.name}");
 
-        _placedTower.SetPlacePosition(Vector2.zero);
-        _placedTower = null;
+        if (tower != null && tower == _placedTower)
+        {
+            _placedTower.ResetPlacePosition();
+            _placedTower = null;
+            //Debug.Log($"Success Exit : {tower?.name}; Placed : {_placedTower?.name}");
+        }
     }
 }

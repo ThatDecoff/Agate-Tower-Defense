@@ -16,7 +16,7 @@ public class Tower : MonoBehaviour
     [SerializeField] private float _bulletSplashRadius = 0f;
     [SerializeField] private Bullet _bulletPrefab;
 
-    public Vector2 PlacePosition { get; private set; }
+    public Vector2? PlacePosition { get; private set; }
 
     private float _runningShootDelay;
     private Enemy _targetEnemy;
@@ -31,6 +31,11 @@ public class Tower : MonoBehaviour
     public void SetPlacePosition(Vector2 newPosition)
     {
         PlacePosition = newPosition;
+    }
+
+    public void ResetPlacePosition()
+    {
+        PlacePosition = null;
     }
 
     public void LockPlacement()
