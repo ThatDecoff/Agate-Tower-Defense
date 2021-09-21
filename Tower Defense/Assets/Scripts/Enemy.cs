@@ -18,6 +18,7 @@ public class Enemy : MonoBehaviour
     {
         _currentHealth = _maxHealth;
         _healthFill.size = _healthBar.size;
+        _healthFill.transform.localScale = Vector3.one;
     }
 
     public void MoveToTarget()
@@ -65,10 +66,16 @@ public class Enemy : MonoBehaviour
     public void ReduceEnemyHealth(int damage)
     {
         _currentHealth -= damage;
+        AudioPlayer.Instance.PlaySFX("hit-enemy");
+
+        Vector3 newFillSize = _healthFill.transform.localScale;
+        newFillSize.x = (float)_currentHealth / _maxHealth;
+        _healthFill.transform.localScale = newFillSize;
 
         if (_currentHealth <= 0)
         {
             gameObject.SetActive(false);
+            AudioPlayer.Instance.PlaySFX("enemy-die");
         }
     }
 }

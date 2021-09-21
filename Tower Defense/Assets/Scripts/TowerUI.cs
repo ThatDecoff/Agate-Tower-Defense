@@ -19,7 +19,7 @@ public class TowerUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        GameObject newTowerObj = Instantiate(_towerPrefab.gameObject);
+        GameObject newTowerObj = Instantiate(_towerPrefab.gameObject, LevelManager.Instance.towerParent);
         _currentSpawnedTower = newTowerObj.GetComponent<Tower>();
         _currentSpawnedTower.ToggleOrderInLayer(true);
     }
